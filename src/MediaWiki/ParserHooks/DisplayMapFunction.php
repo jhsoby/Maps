@@ -7,9 +7,10 @@ use Maps\MapsFunctions;
 use Maps\MappingServices;
 use Maps\Presentation\ParameterExtractor;
 use MWException;
-use ParamProcessor;
 use ParamProcessor\ProcessedParam;
+use ParamProcessor\Processor;
 use Parser;
+use ParserHooks\HookDefinition;
 
 /**
  * Class for the 'display_map' parser hooks.
@@ -38,7 +39,7 @@ class DisplayMapFunction {
 	 * @throws MWException
 	 */
 	public function getMapHtmlForKeyValueStrings( Parser $parser, array $parameters ): string {
-		$processor = new \ParamProcessor\Processor( new \ParamProcessor\Options() );
+		$processor = new Processor( new \ParamProcessor\Options() );
 
 		$service = $this->services->getServiceOrDefault(
 			$this->extractServiceName(
@@ -69,7 +70,7 @@ class DisplayMapFunction {
 	 * @throws MWException
 	 */
 	public function getMapHtmlForParameterList( Parser $parser, array $parameters ) {
-		$processor = new \ParamProcessor\Processor( new \ParamProcessor\Options() );
+		$processor = new Processor( new \ParamProcessor\Options() );
 
 		$service = $this->services->getServiceOrDefault( $this->extractServiceName( $parameters ) );
 
@@ -86,7 +87,7 @@ class DisplayMapFunction {
 		return $this->getMapHtmlFromProcessor( $parser, $processor );
 	}
 
-	private function getMapHtmlFromProcessor( Parser $parser, ParamProcessor\Processor $processor ) {
+	private function getMapHtmlFromProcessor( Parser $parser, Processor $processor ) {
 		$params = $processor->processParameters()->getParameters();
 
 		$this->defaultMapZoom( $params );
@@ -118,8 +119,8 @@ class DisplayMapFunction {
 		return $parameters;
 	}
 
-	public static function getHookDefinition( string $locationDelimiter ): \ParserHooks\HookDefinition {
-		return new \ParserHooks\HookDefinition(
+	public static function getHookDefinition( string $locationDelimiter ): HookDefinition {
+		return new HookDefinition(
 			[ 'display_map', 'display_point', 'display_points', 'display_line' ],
 			self::getParameterDefinitions( $locationDelimiter ),
 			[ 'coordinates' ]
