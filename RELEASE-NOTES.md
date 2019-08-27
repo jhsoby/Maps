@@ -3,6 +3,19 @@ different releases and which versions of PHP and MediaWiki they support, see the
 [platform compatibility tables](INSTALL.md#platform-compatibility-and-release-status).
 
 
+## Maps 7.4.0
+
+Released on August 9th, 2019.
+
+* Fixed default map height bug occurring with recent versions of an used library
+* Removed `egMapsSizeRestrictions` setting, unused since Maps 3.0.0
+
+## Maps 7.3.3
+
+Released on August 2nd, 2019.
+
+* Fixed error in height parameter description
+
 ## Maps 7.3.2
 
 Released on July 25th, 2019.

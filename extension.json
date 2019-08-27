@@ -1,9 +1,9 @@
 {
 	"name": "Maps",
-	"version": "7.3.2",
+	"version": "7.4.0",
 
 	"author": [
-		"[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]",
+		"[https://www.entropywins.wtf/mediawiki Jeroen De Dauw]",
 		"..."
 	],
 	"url": "https://github.com/JeroenDeDauw/Maps/blob/master/README.md#maps",
@@ -47,6 +47,234 @@
 			"defaultcontentmodel": "wikitext"
 		}
 	],
+
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "Maps/resources"
+	},
+
+	"ResourceModules": {
+		"ext.maps.common": {
+			"scripts": [
+				"maps.common.js"
+			],
+			"messages": [
+				"maps-load-failed"
+			]
+		},
+
+		"ext.maps.services": {
+			"dependencies": [
+				"ext.maps.common"
+			],
+			"scripts": [
+				"maps.services.js"
+			]
+		},
+
+		"ext.sm.common": {
+			"dependencies": [
+				"ext.maps.common",
+				"ext.maps.services"
+			],
+			"scripts": [
+				"sm.common.js"
+			]
+		},
+
+		"mapeditor": {
+			"dependencies": [
+				"ext.maps.common",
+				"jquery.ui.autocomplete",
+				"jquery.ui.slider",
+				"jquery.ui.dialog"
+			],
+			"scripts": [
+				"editor/js/jquery.miniColors.js",
+				"editor/js/mapeditor.iefixes.js",
+				"editor/js/mapeditor.js"
+			],
+			"styles": [
+				"editor/css/jquery.miniColors.css",
+				"editor/css/mapeditor.css"
+			],
+			"messages": [
+				"mapeditor-parser-error",
+				"mapeditor-none-text",
+				"mapeditor-done-button",
+				"mapeditor-remove-button",
+				"mapeditor-import-button",
+				"mapeditor-export-button",
+				"mapeditor-import-button2",
+				"mapeditor-select-button",
+				"mapeditor-mapparam-button",
+				"mapeditor-clear-button",
+				"mapeditor-imageoverlay-button"
+			]
+		},
+
+		"ext.maps.resizable": {
+			"dependencies": [
+				"jquery.ui.resizable"
+			]
+		},
+
+		"ext.maps.leaflet.base": {
+			"scripts": [
+				"leaflet/leaflet/leaflet.js"
+			],
+			"styles": [
+				"leaflet/leaflet/leaflet.css"
+			]
+		},
+
+		"ext.maps.leaflet": {
+			"dependencies": [
+				"ext.maps.common",
+				"ext.maps.services",
+				"ext.maps.leaflet.base"
+			],
+			"scripts": [
+				"leaflet/jquery.leaflet.js",
+				"leaflet/ext.maps.leaflet.js"
+			],
+			"messages": [
+				"maps-markers",
+				"maps-copycoords-prompt",
+				"maps-searchmarkers-text"
+			]
+		},
+
+		"ext.maps.leaflet.fullscreen": {
+			"dependencies": [
+				"ext.maps.leaflet.base"
+			],
+			"scripts": [
+				"leaflet/leaflet.fullscreen/Control.FullScreen.js"
+			],
+			"styles": [
+				"leaflet/leaflet.fullscreen/Control.FullScreen.css"
+			]
+		},
+
+		"ext.maps.leaflet.markercluster": {
+			"dependencies": [
+				"ext.maps.leaflet.base"
+			],
+			"scripts": [
+				"leaflet/leaflet.markercluster/leaflet.markercluster.js"
+			],
+			"styles": [
+				"leaflet/leaflet.markercluster/MarkerCluster.css"
+			]
+		},
+
+		"ext.maps.leaflet.providers": {
+			"dependencies": [
+				"ext.maps.leaflet.base"
+			],
+			"scripts": [
+				"leaflet/leaflet-providers/leaflet-providers.js"
+			]
+		},
+
+		"ext.maps.leaflet.editable": {
+			"dependencies": [
+				"ext.maps.leaflet.base"
+			],
+			"scripts": [
+				"leaflet/leaflet.editable/Leaflet.Editable.js"
+			]
+		},
+
+		"ext.maps.leaflet.editor": {
+			"dependencies": [
+				"ext.maps.leaflet"
+			],
+			"scripts": [
+				"leaflet/leaflet.editor.js"
+			]
+		},
+
+		"ext.maps.leaflet.leafletajax": {
+			"dependencies": [
+				"ext.maps.leaflet",
+				"ext.sm.common"
+			],
+			"scripts": [
+				"leaflet/ext.sm.leafletajax.js"
+			]
+		},
+
+		"ext.maps.googlemaps3": {
+			"dependencies": [
+				"ext.maps.common"
+			],
+			"scripts": [
+				"GoogleMaps/jquery.googlemap.js",
+				"GoogleMaps/ext.maps.googlemaps3.js"
+			],
+			"messages": [
+				"maps-googlemaps3-incompatbrowser",
+				"maps-copycoords-prompt",
+				"maps-searchmarkers-text",
+				"maps-fullscreen-button",
+				"maps-fullscreen-button-tooltip"
+			]
+		},
+
+		"ext.maps.gm3.markercluster": {
+			"dependencies": [
+				"ext.maps.googlemaps3"
+			],
+			"scripts": [
+				"GoogleMaps/gm3-util-library/markerclusterer.js"
+			]
+		},
+
+		"ext.maps.gm3.markerwithlabel": {
+			"dependencies": [
+				"ext.maps.googlemaps3"
+			],
+			"scripts": [
+				"GoogleMaps/gm3-util-library/markerwithlabel.js"
+			],
+			"styles": [
+				"GoogleMaps/gm3-util-library/markerwithlabel.css"
+			]
+		},
+
+		"ext.maps.gm3.geoxml": {
+			"dependencies": [
+				"ext.maps.googlemaps3"
+			],
+			"scripts": [
+				"GoogleMaps/geoxml3/geoxml3.js",
+				"GoogleMaps/geoxml3/ZipFile.complete.js",
+				"GoogleMaps/geoxml3/ProjectedOverlay.js"
+			]
+		},
+
+		"ext.maps.gm3.earth": {
+			"dependencies": [
+				"ext.maps.googlemaps3"
+			],
+			"scripts": [
+				"GoogleMaps/gm3-util-library/googleearth-compiled.js"
+			]
+		},
+
+		"ext.sm.googlemaps3ajax": {
+			"dependencies": [
+				"ext.maps.googlemaps3",
+				"ext.sm.common"
+			],
+			"scripts": [
+				"GoogleMaps/ext.sm.googlemaps3ajax.js"
+			]
+		}
+	},
+
 	"load_composer_autoloader": true,
 	"manifest_version": 2
 }
